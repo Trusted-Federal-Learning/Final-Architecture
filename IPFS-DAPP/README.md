@@ -1,6 +1,13 @@
 # IPFS-TEST
 
-IPFS与nodejs的交互示例
+* 7.25更新：利用express框架，前端能够手动实现MetaMask调用
+* 待完成：智能合约调用与前端的IPFS调用
+
+* 站点源码：`./src`
+
+
+
+IPFS与nodejs后端的交互示例
 
 
 
@@ -12,7 +19,7 @@ ipfs daemon
 
 
 
-在`ipfs.js`中设置API参数
+在`index.js`中设置API参数
 
 ```js
 const ipfsAPI = require('ipfs-api');
@@ -25,7 +32,7 @@ const ipfs = ipfsAPI({host: 'localhost', port: '5001', protocol: 'http'});
 
 ```bash
 npm install ipfs-api
-node index.js
+node start
 ```
 
 
@@ -33,15 +40,18 @@ node index.js
 运行结果：
 
 ```bash
-$ node index.js
-QmTfGujm4Y5yfs3RJd6paqigdvVc6nMmn7upVVp5YRiPxY
-http://localhost:8080/ipfs/QmTfGujm4Y5yfs3RJd6paqigdvVc6nMmn7upVVp5YRiPxY
-QmRfhWo4c24MWYXLxu69FcJBnKpmnjY9mN5nMiK8U9zNxB
-http://localhost:8080/ipfs/QmRfhWo4c24MWYXLxu69FcJBnKpmnjY9mN5nMiK8U9zNxB
-file:./storage/get/onepiece.png
-{ name: 'naruto', age: 23, level: 'ss' }
+$ npm start
+
+> start
+> node src/index.js
+
+Server running on port 5000
+[ { path: 'QmW2Z7vUSL1weLP4w6AoBz4XEL5jvA6v72QC98Sc2dDEg8',
+    hash: 'QmW2Z7vUSL1weLP4w6AoBz4XEL5jvA6v72QC98Sc2dDEg8',
+    size: 380 } ]
+
 ```
 
 
 
-访问`http://localhost:8080/ipfs/QmTfGujm4Y5yfs3RJd6paqigdvVc6nMmn7upVVp5YRiPxY`可看到文件
+访问`http://localhost:8080/ipfs/QmW2Z7vUSL1weLP4w6AoBz4XEL5jvA6v72QC98Sc2dDEg8`可看到文件

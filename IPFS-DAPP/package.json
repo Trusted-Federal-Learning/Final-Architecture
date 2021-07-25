@@ -1,5 +1,11 @@
 {
   "dependencies": {
-    "ipfs-api": "^26.1.2"
+    "express": "^4.17.1",
+    "ipfs-api": "^26.1.2",
+    "truffle-contract": "^4.0.31",
+    "web3": "^1.4.0"
+  },
+  "scripts": {
+    "start": "node src/index.js"
   }
 }
