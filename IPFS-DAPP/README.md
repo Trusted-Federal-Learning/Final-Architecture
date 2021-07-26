@@ -1,29 +1,28 @@
 # IPFS-TEST
 
-* 7.25更新：利用express框架，前端能够手动实现MetaMask调用
-* 待完成：智能合约调用与前端的IPFS调用
-
+* 7.26更新：利用express框架，前端实现上传IPFS
 * 站点源码：`./src`
-
-
-
-IPFS与nodejs后端的交互示例
 
 
 
 * 启动IPFS
 
 ```bash
+ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["*"]'
+ipfs config --json Addresses.API '"/ip4/0.0.0.0/tcp/5001"'
+ipfs config --json Addresses.Gateway '"/ip4/0.0.0.0/tcp/8080"'
+# 允许跨域访问
+
 ipfs daemon
+# 启动IPFS
 ```
 
 
 
-在`index.js`中设置API参数
+在`ipfs.js`中设置API参数
 
 ```js
-const ipfsAPI = require('ipfs-api');
-const ipfs = ipfsAPI({host: 'localhost', port: '5001', protocol: 'http'});
+const ipfs = window.IpfsApi('127.0.0.1', 5001) // Connect to IPFS
 ```
 
 
@@ -37,21 +36,4 @@ node start
 
 
 
-运行结果：
-
-```bash
-$ npm start
-
-> start
-> node src/index.js
-
-Server running on port 5000
-[ { path: 'QmW2Z7vUSL1weLP4w6AoBz4XEL5jvA6v72QC98Sc2dDEg8',
-    hash: 'QmW2Z7vUSL1weLP4w6AoBz4XEL5jvA6v72QC98Sc2dDEg8',
-    size: 380 } ]
-
-```
-
-
-
-访问`http://localhost:8080/ipfs/QmW2Z7vUSL1weLP4w6AoBz4XEL5jvA6v72QC98Sc2dDEg8`可看到文件
+* IPFS用于存储proof，之前的proof-contract用于存proof的哈希

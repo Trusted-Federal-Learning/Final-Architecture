@@ -30,8 +30,3 @@ async function sendTrans(){
 }
 
 sendTrans()
-
-// 设置当前区块链帐户
-const accounts = ethereum.enable()
-var account = accounts[0]
-alert(account)
