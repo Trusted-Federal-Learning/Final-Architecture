@@ -17,7 +17,7 @@ async function sendTrans(){
         if (window.ethereum) {
             try {
               const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-              setAccounts(accounts);
+              setAccounts(accounts);              
             } catch (error) {
               if (error.code === 4001) {
                 // User rejected request
@@ -30,3 +30,8 @@ async function sendTrans(){
 }
 
 sendTrans()
+
+// 设置当前区块链帐户
+const accounts = ethereum.enable()
+var account = accounts[0]
+alert(account)
