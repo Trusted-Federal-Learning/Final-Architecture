@@ -71,11 +71,15 @@ App = {
         const contract = await App.contracts.MyContract.deployed()
         App.contractInstance = contract
 
-        const value = await App.contractInstance.getUser()
-        const proof = await App.contractInstance.getProof()
+        const Gradient = await App.contractInstance.getGradient()
+        var gra = Gradient.toString()
+        
+
+        const Encrypted = await App.contractInstance.getEncrypted()
         const next = await App.contractInstance.getNext()
-        $('#value').html(value)
-        $('#proof').html(proof)
+        
+        $('#Gradient').html(gra)
+        $('#Encrypted').html(Encrypted)
         $('#next').html(next)
         App.setLoading(false)
     },
@@ -83,10 +87,10 @@ App = {
     set: async () => {
         App.setLoading(true)
 
-        const newUser = $('#newUser').val()
-        const newProof = $('#newProof').val()
-        await App.contractInstance.set(newUser, newProof, {from: App.account})
-        // await App.contractInstance.setProof(newProof, {from: App.account})
+        const newGradient = $('#newGradient').val()
+        const newEncrypted = $('#newEncrypted').val()
+        await App.contractInstance.set(newGradient, newEncrypted, {from: App.account})
+        await App.contractInstance.setEncrypted(newEncrypted, {from: App.account})
         
         window.alert('更新成功，页面值不会马上更新，等待几秒后多刷新几次。')
         App.setLoading(false)

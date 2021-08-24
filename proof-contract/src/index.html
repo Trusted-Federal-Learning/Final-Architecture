@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">-->
+
+    <link href="./css-js/bulma.min.css" rel="stylesheet">
+    <link href="./css-js/site.css" rel="stylesheet">
+    <!--<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>-->
+    <script defer="" src="./css-js/fa.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/@vizuaalog/bulmajs@0.10.2/dist/bulma.js"></script>-->
+    <script src="./css-js/bulma.js"></script>
+    <title>Proof Upload</title>
+  </head>
+  <body>
+      <section class="section">
+        <div class="container">
+            <h1 class="title">
+                Upload your Username and Proof
+            </h1>
+            <div class="notification is-primary hidden" data-bulma-attached="attached">
+                <button class="delete"></button>
+            </div>
+            <div class="tabs-wrapper" data-bulma-attached="attached">
+                <div class="tabs">
+                    <ul>
+  
+                    </ul>
+                </div>
+                <form onSubmit="App.set(); return false;" role="form">
+                  <div class="tabs-content">
+                      <ul>
+                          <li class="is-active">
+                              
+                                  <div class="field">
+                                      <label class="label">Username</label>
+                                      <div class="control has-icons-left">
+                                          <input class="input" id="newUser" placeholder="username" type="text" autocomplete="off">
+                                      </div>
+                                  </div>
+
+                                  <div class="field">
+                                      <label class="label">Proof</label>
+                                      <div class="control has-icons-left">
+                                          <input class="input" id="newProof" placeholder="proof" type="text" autocomplete="off">
+                                      </div>
+                                  </div>
+
+                                  <div class="control">
+                                      <button class="button is-primary" type="submit">UPLOAD</button>
+                                    
+                                  </div>
+
+                          </li>
+                          <li class="">
+                          </li>
+                      </ul>
+                  </div>
+                  <div>
+                    <br><br><br>
+                    <p class="title">Welcome  <span id="value"></span></p>
+                    <p class="text">Proof: <span id = "proof"></span></p>
+                    <p class="text">User address: <span id="account"></span></p>
+                    <div id="loader">Loading...</div>
+                  </div>
+            </form>
+            </div>
+        </div>
+    </section>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="web3.min.js"></script>
+    <script src="vendor/@truffle/contract/dist/truffle-contract.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
