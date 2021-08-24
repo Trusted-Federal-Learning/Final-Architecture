@@ -1,30 +1,32 @@
 pragma solidity >=0.4.22 <0.9.0;
 contract MyContract {
-
-    uint now;
+    uint mod = 70;
+    uint roundNow;
     bool nxtRound;
-    uint Gradient;
+    uint[] Gradient = new uint[](mod);
+    // w[10][4],v[3][10] in the training model
+
     string Encrypted;
     
-    uint average;
-    uint totalGra;
-    uint totalRand;
+    uint[] average = new uint[](mod);
+    uint[] totalGra = new uint[](mod);
+    uint[] totalRand = new uint[](mod);
     
     uint totalRound = 20;
     bool isEnd;
-
     
     string next;
     string[]  nextList = new string[](5);
 
     constructor() public {
-        now = 1;
-        Gradient = 0;
-        totalGra = 0;
+        roundNow = 1;
+        Gradient = [0];
+        totalGra = [0];
         // Gradient with random number
-        totalRand = 0;
+        totalRand = [0];
         // Total of random number
-        average = 0;
+        average = [0];
+
         Encrypted = "myEncrypted"; 
         // To reveive encrypted P
         nextList = ["A","B","C","D","E"];
@@ -34,7 +36,7 @@ contract MyContract {
     }
 
 
-    function getGradient() public view returns(uint) {
+    function getGradient() public view returns(uint[] memory) {
         return Gradient;
     }
 
@@ -50,19 +52,27 @@ contract MyContract {
         return nxtRound;
     }
 
-    function set(uint _Gradient, string memory _Encrypted) public {
+    function set(uint[] memory _Gradient, string memory _Encrypted) public {
+        if(_Gradient.length != mod) {
+            isEnd = true;
+            // Wrong number of gradient
+        }
+
         Gradient = _Gradient;
-        totalGra += _Gradient;
+        for(uint i = 0; i < mod; i++) {
+            totalGra[i] += _Gradient[i];
+        }
+
         Encrypted = _Encrypted;
-        next = nextList[now++ % 5];
+        next = nextList[roundNow++ % 5];
     }
 
     function getNow() public view returns (uint) {
-        return now;
+        return roundNow;
     }
 
     function checkEnd() public returns (bool) {
-        if(now == totalRand)
+        if(roundNow == totalRound)
             isEnd = true;
         return isEnd;
     }
@@ -72,21 +82,25 @@ contract MyContract {
     }
     // To judge if a == b
 
-    function setTotalRand(uint Rand) public returns (uint){
-        if(hashCompare(next, "A")){
+    function setTotalRand(uint[] memory Rand) public returns (uint[] memory) {
+        if(hashCompare(next, "A")) {
             totalRand = Rand;
-            totalGra -= totalRand;
-            // calc the real Gradient
-            average = totalGra / nextList.length;
-            nxtRound = true;
-            return average;
+            for(uint i = 0; i < mod; i++) {
+                totalGra[i] -= totalRand[i];
+                // calc the real Gradient
+            } 
+            for(uint i = 0; i< mod; i++) {
+                average[i] = totalGra[i] / nextList.length;
+            }    
+                nxtRound = true;
+                return average;
         }
     }
 
     function clear() public{
-        totalGra = 0;
-        totalRand = 0;
-        average = 0;
+        totalGra = [0];
+        totalRand = [0];
+        average = [0];
         nxtRound = false;
     }
 }
