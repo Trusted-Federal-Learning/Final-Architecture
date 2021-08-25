@@ -15,6 +15,7 @@ contract MyContract {
     
     string next;
     string[]  nextList = new string[](5);
+    string url;
 
     constructor() public {
         roundNow = 1;
@@ -38,18 +39,8 @@ contract MyContract {
         return next;
     }
 
-
-    function set(uint[] memory _Gradient) public {
-        if(_Gradient.length != mod) {
-            isEnd = true;
-            // Wrong number of gradient
-        }
-
-        Gradient = _Gradient;
-        for(uint i = 0; i < mod; i++) {
-            totalGra[i] += _Gradient[i];
-        }
-        next = nextList[roundNow++ % 5];
+    function getUrl() public view returns(string memory) {
+        return url;
     }
 
     function getNow() public view returns (uint) {
@@ -61,6 +52,22 @@ contract MyContract {
             isEnd = true;
         return isEnd;
     }
+
+
+    function set(uint[] memory _Gradient, string memory _url) public {
+        if(_Gradient.length != mod) {
+            isEnd = true;
+            // Wrong number of gradient
+        }
+        url = _url;
+        Gradient = _Gradient;
+        for(uint i = 0; i < mod; i++) {
+            totalGra[i] += _Gradient[i];
+        }
+        next = nextList[roundNow++ % 5];
+    }
+
+    
 
     function hashCompare(string memory a, string memory b) public returns (bool) {
         return keccak256(bytes(a)) == keccak256(bytes(b));
